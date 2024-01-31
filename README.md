@@ -19,4 +19,3 @@ Check out the live demo of the app [here](deployed_link).
 
 - **Backend API Endpoints:** The backend provides API endpoints for fetching data based on different time intervals (1 week, 1 month, 1 year, all).
 
-- **Deployment:** The app is deployed on [Vercel/Netlify/fly.io/render.com/any other platform].
