@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import '../App.css';
 import Logo from '../resources/Logo.svg';
 import Avatar from '../resources/Avatar.svg'
 import { IconLayoutCollage, IconLogout, IconBasketCheck, IconSettings2, IconChevronDown, IconChevronUp, IconSearch, IconUsers, IconClipboardData, IconWorld, IconMessageCircle, IconDatabaseExport } from '@tabler/icons-react';
 
 function Navbar() {
+    const [showDropdown, setShowDropdown] = useState(false);
+
+    const handleDropdownToggle = () => {
+        setShowDropdown(!showDropdown);
+    };
     return (
         <div className="Navbar">
             <div className="logo">
@@ -18,14 +23,43 @@ function Navbar() {
                     </div>
                 </div>
                 <div className="items">
-                    <IconLayoutCollage size={16} color="#7D7D7D" />
+                    <IconLayoutCollage size={16} color="#FFA500" />
                     <div className="text">Dashboard</div>
                 </div>
-                <div className="items options">
-                    <IconUsers size={16} color="#7D7D7D" />
-                    <div className="text">Customers</div>
-                    <IconChevronDown className="drop" size={16} />
-                </div>
+                {showDropdown ? (<div className="open">
+                    <div onClick={handleDropdownToggle} className="items option">
+                        <IconUsers size={16} color="#7D7D7D" />
+                        <div className="text" >
+                            Customers
+                        </div>
+                        <IconChevronUp className="drop" size={16} />
+                    </div>
+                    <div className="options ">
+                        <div className="items-drop">
+                            <div className="text" >
+                                Current
+                            </div>
+                        </div>
+
+                        <div className="items-drop">
+                            <div className="text" >
+                                New
+                            </div>
+                        </div>
+                        <div className="items-drop">
+                            <div className="text" >
+                                Negotiating
+                            </div>
+                        </div>
+                    </div>
+                </div>) : (
+                    <div onClick={handleDropdownToggle} className="items option">
+                        <IconUsers size={16} color="#7D7D7D" />
+                        <div className="text">Customers</div>
+                        <IconChevronDown className="drop" size={16} />
+                    </div>
+                )}
+
                 <div className="items">
                     <IconClipboardData size={16} color="#7D7D7D" />
                     <div className="text">All Reports</div>
@@ -65,7 +99,7 @@ function Navbar() {
                     <div className="text">Log out</div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
