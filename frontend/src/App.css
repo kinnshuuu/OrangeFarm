@@ -1,7 +1,22 @@
 .App {
   margin: 0;
   padding: 1% 1.5% 1% 1.5%;
+  display: flex;
 }
+
+.sidebar {
+  flex-shrink: 0;
+  height: 96vh;
+  /* overflow: auto; */
+  position: sticky;
+  top: 0;
+}
+
+.content {
+  flex-grow: 1;
+  width: .98rem;
+}
+
 
 .Navbar {
   border-radius: 16px;
@@ -10,7 +25,6 @@
   width: 280px;
   display: flex;
   flex-direction: column;
-  position: sticky;
 }
 
 .logo {
@@ -120,16 +134,16 @@
   background-color: #FFF7E8;
 }
 
-Link{
+Link {
   text-decoration: none;
 }
 
-.uncollapsed{
+.uncollapsed {
   display: flex;
   align-items: center;
 }
-.collapser
-{
+
+.collapser {
   display: flex;
   background-color: #F6F6F3;
   border-radius: 4px;
