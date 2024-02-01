@@ -7,7 +7,7 @@ This repository contains the solution for the Evaluation Assignment - Building a
 
 ## Demo
 
-Check out the live demo of the app [here](https://65bb38e6d991f039d3b3556a--glistening-eclair-6ea68c.netlify.app/).
+Check out the live demo of the app [here](https://65bb8371a823b21203c129e8--glistening-eclair-6ea68c.netlify.app/).
 
 ## Features
 
