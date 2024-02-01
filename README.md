@@ -19,3 +19,42 @@ Check out the live demo of the app [here](deployed_link).
 
 - **Backend API Endpoints:** The backend provides API endpoints for fetching data based on different time intervals (1 week, 1 month, 1 year, all).
 
+## Backend API Endpoints
+
+The backend of this application exposes API endpoints to fetch data based on different time intervals. These endpoints allow the frontend to retrieve and display relevant data for various time periods.
+
+### API Endpoints:
+
+1. **1 Week Data:**
+   - **Endpoint:** `/api/data?query=1week`
+   - **Description:** Fetches data for the last 7 days.
+   - **Response Format:**
+
+2. **1 Month Data:**
+   - **Endpoint:** `/api/data?query=1month`
+   - **Description:** Retrieves data for the last 30 days.
+
+3. **1 Year Data:**
+   - **Endpoint:** `/api/data?query=1year`
+   - **Description:** Returns data for the last 365 days.
+  
+4. **All Data:**
+   - **Endpoint:** `/api/data?query=all`
+   - **Description:** Retrieves the entire dataset.
+
+### Usage
+
+To fetch data for a specific time interval, make a GET request to the respective endpoint. The `query` parameter in the URL determines the time interval:
+
+- `/api/data?query=1week` for 1-week data
+- `/api/data?query=1month` for 1-month data
+- `/api/data?query=1year` for 1-year data
+- `/api/data?query=all` for the entire dataset.
+
+Example using `fetch` in JavaScript:
+
+```javascript
+fetch('/api/data?query=1week')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error fetching data:', error));
