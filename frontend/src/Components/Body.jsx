@@ -69,8 +69,52 @@ const Body = () => {
     const fetchData = async () => {
       try {
         const query = "1year"; // Define your query here
-        const response = await axios.get(`http://localhost:5000/api/data?query=${query}`);
-        console.log(response.data);
+        const response = await axios.get("https://chakr.onrender.com/api/downsampled");
+        // console.log(response.data);
+
+
+        // Function to restructure the data
+        function restructureData(inputData) {
+          const result = {
+            labels: [],
+            datasets: [{
+              label: "Profit %",
+              data: [],
+              backgroundColor: "#25CD2566",
+              borderColor: "#25CD2566, #25CD2500",
+              tension: 0.4,
+              fill: true,
+              pointStyle: "rect",
+              pointBorderColor: "blue",
+              pointBackgroundColor: "#fff",
+              showLine: true,
+            }]
+          };
+
+          const dataMap = {};
+
+          // Process each data point
+          // debugger
+          inputData.downsampledData.forEach(entry => {
+            const year = entry.Timestamp.substring(0, 4);
+            if (!dataMap[year]) {
+              dataMap[year] = [];
+            }
+            dataMap[year].push(entry.ProfitPercentage/500);
+          });
+
+          for (const year in dataMap) {
+            const averageProfit = dataMap[year].reduce((acc, val) => acc + val, 0) / (dataMap[year].length);
+            result.labels.push(year);
+            result.datasets[0].data.push(averageProfit);
+          }
+
+          return result;
+        }
+
+        const restructuredData = restructureData(response.data);
+        console.log(JSON.stringify(restructuredData, null, 2));
+        setData1(restructuredData)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
