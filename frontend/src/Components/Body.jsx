@@ -48,14 +48,12 @@ ChartJS.register(
 );
 
 const Body = () => {
-  const [revenue, setRevenue] = useState([]);
-
   const [data1, setData1] = useState({
     labels: ["2016", "2017", "2018", "2019"],
     datasets: [
       {
-        label: false,
-        data: [92, 26, 75, 42],
+        label: "Profit %",
+        data: [27, 35, 56, 42],
         backgroundColor: "#25CD2566",
         borderColor: "#25CD2566, #25CD2500",
         tension: 0.4,
@@ -67,6 +65,19 @@ const Body = () => {
       },
     ],
   });
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const query = "1year"; // Define your query here
+        const response = await axios.get(`http://localhost:5000/api/data?query=${query}`);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   const gradient = () => {
     const chartCanvas = document.getElementById("yourChartId");
 
@@ -78,12 +89,10 @@ const Body = () => {
       return gradient;
     }
 
-    // Handle the case where the canvas element is not found
-    return "rgba(37, 205, 37, 0.4)"; // or any default value
+    return "rgba(37, 205, 37, 0.4)";
   };
 
   useEffect(() => {
-    // Set custom CSS variables
     document.documentElement.style.setProperty("--Light-Green", "#25CD25");
   }, []);
 
@@ -101,12 +110,6 @@ const Body = () => {
     ],
   };
 
-  useEffect(() => {
-    axios.get("https://chakr.onrender.com/api/downsampled").then((res) => {
-      setRevenue(res.data.downsampledData);
-      console.log(res);
-    });
-  }, []);
 
   return (
     <div>
@@ -444,8 +447,8 @@ const Body = () => {
         }}
         mt="20px"
       >
-        
-        <Customers/>
+
+        <Customers />
         <Box minWidth="45%" minHeight="300px">
           <Box
             style={{
